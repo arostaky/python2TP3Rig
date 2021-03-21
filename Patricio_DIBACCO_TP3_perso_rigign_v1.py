@@ -51,23 +51,50 @@ class Perso():
         cmds.bindSkin( leftArm, leftArmJ)
     #model rightArm:
         rightArm = 'rightArm' + randomNaming
+        rightArmJ = 'rightArmJ'+ randomNaming
+        rightElbowJ = 'rightElbowJ'+randomNaming
+        rightWristJ = 'rightWristJ'+randomNaming
         cmds.polyCube(name=rightArm, w =rightArmVal*2, h = rightArmVal*0.25, d = rightArmVal)
         cmds.scale(0.3, z = True)
         cmds.move(-1,8.5,0)
         cmds.xform(r= True, ro=(0, 0, 45) )
         cmds.polySmooth( rightArm + '.f[0:5]', dv=rightArmVal )
+        cmds.select( d=True )
+        cmds.joint(n=rightArmJ, p=(-0.5, 9, 0) )
+        cmds.joint(n=rightElbowJ, p=(-1, 8.5, 0) )
+        cmds.joint(n=rightWristJ, p=(-1.5, 8, 0) )
+        cmds.ikHandle( sj=rightArmJ, ee=rightWristJ)
+        cmds.bindSkin( rightArm, rightArmJ)
     #model leftLeg:
         leftLeg = 'leftLeg' + randomNaming
+        leftLegJ = 'leftLegJ' + randomNaming
+        leftLegKneeJ = 'leftLegKneeJ'+randomNaming
+        leftLegCalvesJ = 'leftLegCalvesJ' +randomNaming
         cmds.polyCube(name=leftLeg, w =leftLegVal*0.3, h = leftLegVal*3.5, d = leftLegVal)
         cmds.scale(0.3, z = True)
         cmds.move(-0.3,6,0)
         cmds.polySmooth( leftLeg + '.f[0:5]', dv=leftLegVal )
+        cmds.select( d=True )
+        cmds.joint(n=leftLegJ, p=(-0.3, 7, 0) )
+        cmds.joint(n=leftLegKneeJ, p=(-0.3, 6, 0) )
+        cmds.joint(n=leftLegCalvesJ, p=(-0.3, 5, 0) )
+        cmds.ikHandle( sj=leftLegJ, ee=leftLegCalvesJ)
+        cmds.bindSkin( leftLeg, leftLegJ)
     #model rightLeg:
         rightLeg = 'rightLeg' + randomNaming
+        rightLegJ = 'rightLegJ'+ randomNaming
+        rightLegKneeJ = 'rightLegKneeJ'+randomNaming
+        rightLegCalvesJ = 'rightLegCalvesJ'+randomNaming
         cmds.polyCube(name=rightLeg, w = rightLegVal*0.3, h = rightLegVal*3.5, d = rightLegVal)
         cmds.scale(0.3, z = True)
         cmds.move(0.3,6,0)
         cmds.polySmooth( rightLeg +'.f[0:5]', dv=rightLegVal )
+        cmds.select( d=True )
+        cmds.joint(n=rightLegJ, p=(0.3, 7, 0) )
+        cmds.joint(n=rightLegKneeJ, p=(0.3, 6, 0) )
+        cmds.joint(n=rightLegCalvesJ, p=(0.3, 5, 0) )
+        cmds.ikHandle( sj=rightLegJ, ee=rightLegCalvesJ)
+        cmds.bindSkin( rightLeg, rightLegJ)
     #group everything:
         cmds.group(headName, bodyName, leftArm, rightArm, leftLeg, rightLeg, n=nombre)
         
